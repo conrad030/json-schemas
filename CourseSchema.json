@@ -1,0 +1,461 @@
+{
+    "type": "object",
+    "properties": {
+        "type": {
+            "type": "string"
+        },
+        "quizzes": {
+            "type": "array",
+            "items": {
+                "$ref": "#/definitions/Quiz"
+            }
+        },
+        "card_stacks": {
+            "type": "array",
+            "items": {
+                "$ref": "#/definitions/CardStack"
+            }
+        },
+        "exams": {
+            "type": "array",
+            "items": {
+                "$ref": "#/definitions/Exam"
+            }
+        },
+        "name": {
+            "type": "string"
+        },
+        "pin_code": {
+            "type": "string"
+        },
+        "is_active": {
+            "type": "boolean"
+        },
+        "is_public": {
+            "type": "boolean"
+        },
+        "is_password_protected": {
+            "type": "boolean"
+        },
+        "password": {
+            "type": "string"
+        },
+        "responsible": {
+            "type": "string"
+        },
+        "description": {
+            "type": "string"
+        },
+        "num_units": {
+            "type": "integer"
+        },
+        "num_questions": {
+            "type": "integer"
+        },
+        "num_stacks": {
+            "type": "integer"
+        },
+        "num_cards": {
+            "type": "integer"
+        },
+        "created_at": {
+            "type": "string",
+            "format": "date-time"
+        },
+        "created_by": {
+            "type": "string",
+            "format": "uuid"
+        },
+        "updated_at": {
+            "type": "string",
+            "format": "date-time"
+        },
+        "category": {
+            "$ref": "#/definitions/Category"
+        },
+        "organization": {
+            "$ref": "#/definitions/Organization"
+        },
+        "meta:importType": {
+            "type": "string"
+        },
+        "id": {
+            "type": "integer",
+            "minimum": 0
+        }
+    },
+    "required": [
+        "category",
+        "is_active",
+        "is_password_protected",
+        "is_public",
+        "name",
+        "num_cards",
+        "num_questions",
+        "num_stacks",
+        "num_units",
+        "organization",
+        "type",
+        "id",
+        "pin_code",
+        "quizzes",
+        "card_stacks",
+        "exams"
+    ],
+    "definitions": {
+        "CardStack": {
+            "type": "object",
+            "properties": {
+                "cards": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Card"
+                    }
+                },
+                "name": {
+                    "type": "string"
+                },
+                "num_cards": {
+                    "type": "integer"
+                },
+                "created_at": {
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "created_by": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "position": {
+                    "type": "integer"
+                },
+                "active": {
+                    "type": "boolean"
+                }
+            },
+            "required": [
+                "active",
+                "cards",
+                "name",
+                "num_cards",
+                "position"
+            ],
+            "title": "CardStack"
+        },
+        "Card": {
+            "type": "object",
+            "properties": {
+                "tags": {
+                    "type": "array",
+                    "items": {}
+                },
+                "text": {
+                    "type": "string"
+                },
+                "answer": {
+                    "type": "string"
+                },
+                "explanation": {
+                    "type": "string"
+                },
+                "weblink": {
+                    "type": "string",
+                    "format": "uri"
+                },
+                "source": {
+                    "type": "string"
+                },
+                "position": {
+                    "type": "integer"
+                },
+                "created_by": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "created_at": {
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "available_for_quizmarket": {
+                    "type": "boolean"
+                },
+                "video_question_or_answer": {
+                    "anyOf": [
+                        {
+                            "type": "boolean"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ]
+                },
+                "youtube_link_question": {
+                    "type": "string",
+                    "format": "uri"
+                }
+            },
+            "required": [
+                "answer",
+                "available_for_quizmarket",
+                "position",
+                "text",
+                "video_question_or_answer"
+            ],
+            "title": "Card"
+        },
+        "Category": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "integer",
+                    "minimum": 0
+                },
+                "parent": {
+                    "type": "integer"
+                },
+                "name": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "id",
+                "name",
+                "parent"
+            ],
+            "title": "Category"
+        },
+        "Exam": {
+            "type": "object",
+            "properties": {
+                "users": {
+                    "type": "array",
+                    "items": {}
+                },
+                "questions": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Question"
+                    }
+                },
+                "name": {
+                    "type": "string"
+                },
+                "description": {
+                    "type": "string"
+                },
+                "pin_code": {
+                    "type": "string"
+                },
+                "scoring_schema": {
+                    "type": "string"
+                },
+                "created_at": {
+                    "type": "string",
+                    "pattern": "20[0-9]{2}-[01][0-9]-[0-3][0-9] [0-2][0-9]:[0-6][0-9]:[0-6][0-9]$"
+                },
+                "created_by": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "allow_late_registration": {
+                    "type": "boolean"
+                },
+                "is_open": {
+                    "type": "boolean"
+                }
+            },
+            "required": [
+                "allow_late_registration",
+                "is_open",
+                "name",
+                "pin_code",
+                "questions",
+                "scoring_schema",
+                "users"
+            ],
+            "title": "Exam"
+        },
+        "Question": {
+            "type": "object",
+            "properties": {
+                "answers": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Answer"
+                    }
+                },
+                "tags": {
+                    "type": "array",
+                    "items": {}
+                },
+                "text": {
+                    "type": "string"
+                },
+                "explanation": {
+                    "type": "string"
+                },
+                "type": {
+                    "type": "integer"
+                },
+                "created_at": {
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "created_by": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "updated_at": {
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "position": {
+                    "type": "integer"
+                },
+                "num_answers": {
+                    "type": "integer"
+                },
+                "available_for_quizmarket": {
+                    "type": "boolean"
+                },
+                "is_right": {
+                    "type": "boolean"
+                },
+                "weblink": {
+                    "type": "string",
+                    "format": "uri"
+                },
+                "source": {
+                    "type": "string"
+                },
+                "media": {
+                    "$ref": "#/definitions/Media"
+                },
+                "updated_by": {
+                    "type": "string",
+                    "format": "uuid"
+                }
+            },
+            "required": [
+                "answers",
+                "available_for_quizmarket",
+                "num_answers",
+                "position",
+                "text",
+                "type"
+            ],
+            "title": "Question"
+        },
+        "Answer": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "integer",
+                    "minimum": 0
+                },
+                "text": {
+                    "type": "string"
+                },
+                "is_right": {
+                    "type": "boolean"
+                }
+            },
+            "required": [
+                "id",
+                "is_right",
+                "text"
+            ],
+            "title": "Answer"
+        },
+        "Media": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "integer",
+                    "minimum": 0
+                },
+                "url": {
+                    "type": "string",
+                    "format": "uri"
+                },
+                "uuid": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "file_ext": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "file_ext",
+                "id",
+                "url",
+                "uuid"
+            ],
+            "title": "Media"
+        },
+        "Organization": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "integer",
+                    "minimum": 0
+                },
+                "name": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "id",
+                "name"
+            ],
+            "title": "Organization"
+        },
+        "Quiz": {
+            "type": "object",
+            "properties": {
+                "questions": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Question"
+                    }
+                },
+                "name": {
+                    "type": "string"
+                },
+                "description": {
+                    "type": "string"
+                },
+                "num_questions": {
+                    "type": "integer"
+                },
+                "created_at": {
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "created_by": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "updated_at": {
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "position": {
+                    "type": "integer"
+                },
+                "active": {
+                    "type": "boolean"
+                }
+            },
+            "required": [
+                "active",
+                "name",
+                "num_questions",
+                "position",
+                "questions"
+            ],
+            "title": "Quiz"
+        }
+    }
+}
